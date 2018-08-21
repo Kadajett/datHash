@@ -62,13 +62,17 @@ for (let i = 10; i >= 0; i--) {
 }
 
 console.time('with 10 records in the map')
-h.get(2)
+for (let i = 10; i >= 0; i--) {
+    h.get(`element${i}`);
+}
 console.timeEnd('with 10 records in the map')
 
 for (let i = 500000; i >= 0; i--) {
     h.set(`element${i}`, i);
 }
 
-console.time('with 5000000 records in the map')
-h.get(254000)
-console.timeEnd('with 5000000 records in the map')
+console.time('with 500000 records in the map')
+for (let i = 500000; i >= 0; i--) {
+    h.get(`element${i}`);
+}
+console.timeEnd('with 500000 records in the map')
