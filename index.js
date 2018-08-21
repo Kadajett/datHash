@@ -3,6 +3,11 @@ class DatHash {
         this.list = [];
     }
 
+    getBucketUtilization(numberOfPairs) {
+        console.log(this.list.length, numberOfPairs)
+        return (this.list.length / numberOfPairs) * 10000
+    }
+
     /**
      * O(1 + number of collisions for a hash?)
      * @param {*} x 
@@ -51,7 +56,7 @@ class DatHash {
             hash = ((hash << 5) - hash) + char;
             hash = hash & hash;
         }
-        return -hash;
+        return Math.abs(hash % this.list.length);
     }
 }
 
@@ -67,12 +72,14 @@ for (let i = 10; i >= 0; i--) {
 }
 console.timeEnd('with 10 records in the map')
 
-for (let i = 500000; i >= 0; i--) {
+for (let i = 1000; i >= 0; i--) {
     h.set(`element${i}`, i);
 }
 
-console.time('with 500000 records in the map')
-for (let i = 500000; i >= 0; i--) {
+console.time('with 10000 records in the map')
+for (let i = 10000; i >= 0; i--) {
     h.get(`element${i}`);
 }
-console.timeEnd('with 500000 records in the map')
+console.timeEnd('with 10000 records in the map')
+
+console.log(`Utilized bucket percentage ${h.getBucketUtilization(10000)}%`);
