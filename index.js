@@ -51,16 +51,24 @@ class DatHash {
             hash = ((hash << 5) - hash) + char;
             hash = hash & hash;
         }
-        return hash;
+        return -hash;
     }
 }
 
 let h = new DatHash();
 
-for (let i = 1000000; i >= 0; i--) {
+for (let i = 10; i >= 0; i--) {
     h.set(`element${i}`, i);
 }
 
-console.time('with lots of records in the map')
-h.get('I_DONT_EXIST')
-console.timeEnd('with lots of records in the map')
+console.time('with 10 records in the map')
+h.get(2)
+console.timeEnd('with 10 records in the map')
+
+for (let i = 500000; i >= 0; i--) {
+    h.set(`element${i}`, i);
+}
+
+console.time('with 5000000 records in the map')
+h.get(254000)
+console.timeEnd('with 5000000 records in the map')
