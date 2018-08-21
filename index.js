@@ -3,6 +3,10 @@ class DatHash {
         this.list = [];
     }
 
+    /**
+     * O(1 + number of collisions for a hash?)
+     * @param {*} x 
+     */
     get(x) {
         let result;
         let i = this.hash(x);
@@ -20,6 +24,11 @@ class DatHash {
         return result;
     }
 
+    /**
+     * O(1)
+     * @param {*} x 
+     * @param {*} y 
+     */
     set(x, y) {
         let i = this.hash(x);
         if(!this.list[i]) {
@@ -28,6 +37,10 @@ class DatHash {
         this.list[i].push([x, y]);
     }
 
+    /**
+     * O(n)
+     * @param {*} key 
+     */
     hash(key) {
         let hash = 0;
         if (key.length == 0) {
